@@ -1,0 +1,15 @@
+hr{
+    border: #fff 1.5px solid;
+    margin: 20px 0px;
+}
+
+.main-container{
+    padding: 0 20px;
+    background-color: #dedede;
+   
+}
+
+p{
+    margin-top: 20px;
+    font-style: italic;
+}

@@ -1,0 +1,50 @@
+<app-create-task *ngIf="showCreateTaskForm" (CloseForm)="CloseTaskForm()"
+    (taskData)="CreateTask($event)"></app-create-task>
+
+<div class="dashboard-container">
+    <div style="display: flex;">
+        <div style="width: 50%">
+            <h2>Dashboard</h2>
+        </div>
+        <div style="width: 50%; text-align: right;">
+            <button class="create-task-btn" (click)="OpenCreateTaskForm()">Create Task</button>
+            <button class="create-task-btn" (click)="fetchTasks()">Fetch Tasks</button>
+            <button class="create-task-btn" (click)="DeleteAll()">Clear Tasks</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="dashboard-item-container ">
+        <app-snackbar *ngIf="errorMessage" [errorMessage]="errorMessage"></app-snackbar>
+        <app-loader *ngIf="isloading"></app-loader>
+
+        <ng-container *ngIf="!isloading">
+            <div *ngIf="Tasks.length==0">
+                <h2>No tasks has been created..!</h2>
+            </div>
+            <div class="task-item" [ngClass]="'task-'+ task?.status" *ngFor="let task of Tasks">
+                <div class="task-title">
+                    <h3>{{task?.title}}</h3>
+                </div>
+                <p><b>Assigned to: </b>{{task?.assignedTo}}</p>
+                <p><b>Priority: </b>{{task?.priority}}</p>
+                <p><b>Status: </b>{{task?.status}}</p>
+                <div class="task-action-icons">
+                    <button (click)="showTaskDetail(task)" class="task-action-btn" title="Detail">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    </button>
+                    <button class="task-action-btn" (click)="EditDetails(task.id)" title="Edit">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </button>
+                    <button class="task-action-btn" (click)="DeleteTask(task.id)" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+        <app-task-details *ngIf="ShowDetails" (CloseDetails)="CloseTaskDetail()" [task]="task"></app-task-details>
+    </div>
+    <app-edit-task *ngIf="ShowEditTaskForm" (closeForm)="closeEditDetails()"
+        [Selectedtask]="SelectedTask"></app-edit-task>
+</div>
