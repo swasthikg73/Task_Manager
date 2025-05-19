@@ -23,8 +23,10 @@ export class DashboardComponent implements OnInit {
   isloading: boolean = false;
   errorMessage: string | null;
   errorSub: Subscription;
-  router: Router;
 
+  isloggedIn: boolean = false;
+
+  constructor(private router: Router) { }
   ngOnInit(): void {
     this.fetchALlTasks();
     this.errorSub = this.TaskService.errorService.subscribe({
@@ -32,6 +34,14 @@ export class DashboardComponent implements OnInit {
         this.handleError(err);
       }
     })
+
+    this.isloggedIn = localStorage.getItem('Dummyawttoken') ? true : false;
+
+    if (this.isloggedIn) {
+
+    } else {
+      this.router.navigateByUrl('login')
+    }
   }
 
   OpenCreateTaskForm() {
