@@ -1,3 +1,8 @@
+Login Credentails
+Email : swasthikg32@gmail.com
+Password :123456
+
+
 # AngularHttpClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
